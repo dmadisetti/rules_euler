@@ -1,0 +1,8 @@
+package(default_visibility = ["//visibility:public"])
+
+sh_binary(
+    name = "examine",
+    srcs = ["examine.sh"],
+    deps = ["//common"],
+    data = ["@euler_offline//:project_euler_problems.txt"],
+)

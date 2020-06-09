@@ -1,0 +1,20 @@
+# Expose Licenses and Readme for external usage.
+package(default_visibility = ["//visibility:public"])
+
+# Expose testing for these rules.
+load(":euler.bzl", "euler_test")
+load(":rules_test.bzl", "rules_test_suite")
+
+# The licenses API is deprecated in Bazel anyway, but putting this here to
+# indicate that following the license from Project Euler, this must be used
+# non-commercially.
+licenses(["notice"])
+
+# Expose license for external usage through bazel.
+exports_files([
+    "LICENSE",
+])
+
+# Call a macro that defines targets that perform the tests at analysis time,
+# and that can be executed with "bazel test" to return the result.
+rules_test_suite(name = "rules_test")

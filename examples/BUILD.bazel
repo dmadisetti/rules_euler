@@ -1,0 +1,43 @@
+# Set all target’s visibility in this package to "public".
+package(default_visibility = ["//visibility:public"])
+
+# Load rules_haskell rules.
+load(
+    "@rules_haskell//haskell:defs.bzl",
+    "haskell_binary",
+    "haskell_toolchain_library",
+)
+load(
+    "@euler//:euler.bzl",
+    "euler_test",
+)
+
+# haskell_toolchain_library can access builtin GHC packages
+# and assign them a bazel target name, so that they
+# can be referenced as dependencies.
+haskell_toolchain_library(name = "base")
+
+# An example binary using the Prelude module from the
+# GHC base package, to print the hello world.
+haskell_binary(
+    name = "haskell_solution",
+    srcs = ["haskell_solution.hs"],
+    deps = [":base"],
+)
+
+py_binary(
+    name = "python_solution",
+    srcs = [":python_solution.py"],
+)
+
+euler_test(
+    name = "haskell_test",
+    problem = 1,
+    solution = ":haskell_solution",
+)
+
+euler_test(
+    name = "python_test",
+    problem = 1,
+    solution = ":python_solution",
+)

@@ -1,0 +1,6 @@
+package(default_visibility = ["//visibility:public"])
+
+sh_library(
+    name = "common",
+    srcs = ["common.sh"],
+)

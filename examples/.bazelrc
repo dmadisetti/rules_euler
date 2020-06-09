@@ -1,0 +1,4 @@
+
+# Required for proper building
+common  --copt="-fPIC" --linkopt="-fPIC"
+test    --test_output=all
