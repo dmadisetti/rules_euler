@@ -4,11 +4,14 @@
 
 ## About
 
-`rules_euler` is a Bazel library for quickly iterating one's way through
-[Project Euler](https://projecteuler.net) problems. Using a [repository of verified
+`rules_euler` is a
+[Bazel](https://docs.bazel.build/versions/master/bazel-overview.html) library
+for quickly iterating one's way through [Project
+Euler](https://projecteuler.net) problems. Using a [repository of verified
 answers](https://github.com/davidcorbin/euler-offline), you can test, run, and
 verify your problems. It should just work out of the box:
 
+![Example of rules_euler in action](examples/example.gif)
 
 We also provide some nice helpers to make development even easier. Want to see
 this code in use? Check out my [haskell Project Euler

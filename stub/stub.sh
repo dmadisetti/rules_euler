@@ -59,7 +59,7 @@ tmp_build_hs () {
 haskell_binary(
     name = \"$NAME\",
     srcs = [\"$NAME.hs\"],
-    deps = [:base],
+    deps = [\":base\"],
 )
 
 $(tmp_test)"

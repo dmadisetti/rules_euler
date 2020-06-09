@@ -17,17 +17,21 @@ load(
 # can be referenced as dependencies.
 haskell_toolchain_library(name = "base")
 
-# An example binary using the Prelude module from the
-# GHC base package, to print the hello world.
+py_binary(
+    name = "python_solution",
+    srcs = [":python_solution.py"],
+)
+
+euler_test(
+    name = "python_test",
+    problem = 1,
+    solution = ":python_solution",
+)
+
 haskell_binary(
     name = "haskell_solution",
     srcs = ["haskell_solution.hs"],
     deps = [":base"],
-)
-
-py_binary(
-    name = "python_solution",
-    srcs = [":python_solution.py"],
 )
 
 euler_test(
@@ -36,8 +40,25 @@ euler_test(
     solution = ":haskell_solution",
 )
 
+py_binary(
+    name = "python_solution2",
+    srcs = ["python_solution2.py"],
+)
+
 euler_test(
-    name = "python_test",
-    problem = 1,
-    solution = ":python_solution",
+    name = "python_solution2_test",
+    problem = 2,
+    solution = ":python_solution2",
+)
+
+haskell_binary(
+    name = "haskell_solution2",
+    srcs = ["haskell_solution2.hs"],
+    deps = [":base"],
+)
+
+euler_test(
+    name = "haskell_solution2_test",
+    problem = 2,
+    solution = ":haskell_solution2",
 )
