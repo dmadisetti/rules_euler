@@ -4,6 +4,7 @@ build:ci --verbose_failures
 common:ci --color=no
 test:ci --test_output=errors
 
+run --experimental_ui_limit_console_output=1
 
 
 # test environment does not propagate locales by default

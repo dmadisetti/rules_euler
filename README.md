@@ -1,10 +1,11 @@
-# euler_rules :abacus:
-[![CI Status](https://github.com/dmadisetti/euler_rules/workflows/bazel-test/badge.svg)](https://github.com/dmadisetti/euler_rules)
+# rules_euler :abacus:
+[![CI Status](https://github.com/dmadisetti/rules_euler/workflows/bazel-test/badge.svg)](https://github.com/dmadisetti/rules_euler)
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 ## About
 
-`euler_rules` is a Bazel library for quickly iterating one's way through
-Project Euler problems. Using a [repository of verified
+`rules_euler` is a Bazel library for quickly iterating one's way through
+[Project Euler](https://projecteuler.net) problems. Using a [repository of verified
 answers](https://github.com/davidcorbin/euler-offline), you can test, run, and
 verify your problems. It should just work out of the box:
 
@@ -29,7 +30,7 @@ following in your `WORKSPACE` file:
 http_archive(
     name = "euler",
     strip_prefix = "euler-1.0",
-    urls = ["https://github.com/dmadisetti/euler_rules/archive/v1.0.tar.gz"],
+    urls = ["https://github.com/dmadisetti/rules_euler/archive/v1.0.tar.gz"],
 )
 
 load("@euler//:euler.bzl", "euler_repositories", "euler_test")
@@ -61,12 +62,47 @@ Now when you run `bazel test :euler_7_test`, you can determine whether you got t
 
 The best way to wrap your head around this might be by heading over to the
 [example
-directory](https://github.com/dmadisetti/euler_rules/tree/master/examples). In
+directory](https://github.com/dmadisetti/rules_euler/tree/master/examples). In
 addition to python, there are haskell examples.
 
 ## Scripts
 
 A few helper scripts are provided. `bazel run @euler/examine <problem>` Will
-show you the text for a given problem. `bazel run @euler/stub --haskell
-<problem>` will create a commented code stub for your use. The best way to
-use this is with redirection, e.g. `bazel run @euler/stub --python 137 > problem_137.py`.
+show you the text for a given problem:
+
+```txt
+@euler//examine [--parse|--answer] PROBLEM [PROBLEM_FILE]
+```
+
+and `bazel run @euler//stub -- --haskell <problem>` will create a commented
+code stub for your use:
+
+```txt
+@euler//stub [b name]? [--python|--haskell] PROBLEM [PROBLEM_FILE]
+```
+
+The best way to use this is with redirection, e.g. `bazel run @euler//stub --
+--python 137 > problem_137.py`. You can also generate the build rules with
+`bazel run @euler//stub b my_file_name $PROBLEM`. I wrapped these in a shell
+script and forgot about it. E.g.
+
+```bash
+#!/usr/bin/env bash
+# euler.sh
+
+PROBLEM=$1
+NAMING_SCHEME="euler_${PROBLEM}"
+
+pushd ~/projects/my_euler_stuff
+
+bazel run @euler//stub -- b ${NAMING_SCHEME} --haskell $PROBLEM >> BUILD
+bazel run @euler//stub -- --haskell $PROBLEM > ${NAMING_SCHEME}.hs
+
+vim ${NAMING_SCHEME}.hs
+popd
+```
+
+## Solutions using `rules_euler`
+
+  - PainfulHaskell - dmadisetti
+  - **YourContribution** - You

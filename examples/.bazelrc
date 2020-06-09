@@ -1,4 +1,8 @@
-
-# Required for proper building
+# Required for building haskell properly
 common  --copt="-fPIC" --linkopt="-fPIC"
+
+# Easier to verify answers
 test    --test_output=all
+
+# Nicer when using stubs
+run --experimental_ui_limit_console_output=1

@@ -11,7 +11,7 @@ fi
 
 parse () {
   problem="$(sed -n -e "/^Problem ${PROBLEM}$/,/^Problem/ p" ${PROBLEM_FILE} | \
-    head -n -1 || '')"
+    sed -e 's/[[:space:]]*$//' | head -n -1 || '')"
 
   if [ -z "$problem" ]; then
     echo -e "\e[33mHmmm.. \e[0m It doesn't look like this problem exists. "`
