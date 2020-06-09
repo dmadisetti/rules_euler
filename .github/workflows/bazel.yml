@@ -1,0 +1,35 @@
+name: bazel-test
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Mount bazel cache
+      id: bazel-cache
+      uses: actions/cache@v1
+      with:
+        path: "/home/runner/.cache/bazel"
+        key: bazel-tmp
+
+    - name: Mount download cache
+      id: bin
+      uses: actions/cache@v1
+      with:
+        path: "/home/runner/bin"
+        key: downloads-bin
+
+    - name: Install bazelisk
+      if: steps.bin.outputs.cache-hit != 'true'
+      run: |
+        curl -LO "https://github.com/bazelbuild/bazelisk/releases/download/v1.1.0/bazelisk-linux-amd64"
+        mkdir -p ~/bin/
+        mv bazelisk-linux-amd64 ~/bin/bazel
+        chmod +x ~/bin/bazel
+
+    - name: test
+      run: |
+        cd "${GITHUB_WORKSPACE}"
+        ~/bin/bazel test -t- --test_output=all :all
