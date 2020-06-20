@@ -11,7 +11,9 @@ Euler](https://projecteuler.net) problems. Using a [repositories of verified
 answers](https://github.com/davidcorbin/euler-offline), you can test, run, and
 verify your problems. It should just work out of the box:
 
-![Example of rules_euler in action](examples/example.gif)
+<p align="center">
+  <img width="600" alt="Example of rules_euler in action" src="examples/example.gif">
+</p>
 
 We also provide some nice helpers to make development even easier. Want to see
 this code in use? Check out my [haskell Project Euler
