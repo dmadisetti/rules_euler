@@ -62,3 +62,20 @@ euler_test(
     problem = 2,
     solution = ":haskell_solution2",
 )
+
+haskell_binary(
+    name = "file_example",
+    srcs = ["file_example.hs"],
+    deps = [
+        "//:base",
+    ],
+    data = [
+        "@euler//:external_euler",
+    ],
+)
+
+euler_test(
+    name = "file_example_test",
+    problem = 22,
+    solution = ":file_example",
+)

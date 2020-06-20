@@ -7,7 +7,7 @@
 `rules_euler` is a
 [Bazel](https://docs.bazel.build/versions/master/bazel-overview.html) library
 for quickly iterating one's way through [Project
-Euler](https://projecteuler.net) problems. Using a [repository of verified
+Euler](https://projecteuler.net) problems. Using a [repositories of verified
 answers](https://github.com/davidcorbin/euler-offline), you can test, run, and
 verify your problems. It should just work out of the box:
 
@@ -21,7 +21,8 @@ repository](https://github.com/dmadisetti/painfulhaskell).
 Commercial use is not allowed, as Project Euler questions are licensed under
 [Non-Commercial Creative Commons](https://projecteuler.net/copyright), which
 come from our data source dependency
-[euler-offline](https://github.com/davidcorbin/euler-offline) by David Corbin.
+[euler-offline](https://github.com/davidcorbin/euler-offline) by David Corbin
+and [PocketEuler](https://github.com/imsky/PocketEuler) by imsky.
 
 ## Usage
 
@@ -68,6 +69,17 @@ The best way to wrap your head around this might be by heading over to the
 directory](https://github.com/dmadisetti/rules_euler/tree/master/examples). In
 addition to python, there are haskell examples.
 
+## External Files
+
+For problems that require additional files, you can access them directly
+through the `euler_rules` project. To do this, use a `@euler//:external_files`
+data dependency, and you can then access the file in
+`external/euler/files/<file>`. Refer to
+[`file_example.hs`](https://github.com/dmadisetti/rules_euler/blob/master/examples/file_example.hs)
+and the respective [BUILD
+rules](https://github.com/dmadisetti/rules_euler/blob/master/examples/BUILD.bazel#L66)
+for an example on this.
+
 ## Scripts
 
 A few helper scripts are provided. `bazel run @euler/examine <problem>` Will
@@ -104,6 +116,11 @@ bazel run @euler//stub -- --haskell $PROBLEM > ${NAMING_SCHEME}.hs
 vim ${NAMING_SCHEME}.hs
 popd
 ```
+
+## TODO
+
+  - Allow for better templating with stubs. PRs welcome.
+  - Consolidate data sources.
 
 ## Solutions using `rules_euler`
 

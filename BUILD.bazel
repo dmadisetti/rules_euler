@@ -10,6 +10,14 @@ load(":rules_test.bzl", "rules_test_suite")
 # non-commercially.
 licenses(["notice"])
 
+genrule(
+    name = "external_euler",
+    srcs = ["@pocket_euler//:files"],
+    outs = ["files"],
+    output_to_bindir = 1,
+    cmd = "mv external/pocket_euler/files $@ && ln -s $@ .",
+)
+
 # Expose license for external usage through bazel.
 exports_files([
     "LICENSE",

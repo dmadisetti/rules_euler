@@ -21,6 +21,17 @@ def euler_repositories():
             sha256 = sha,
         )
 
+    pocket_euler_version = "f66fc977686fab8b129390fdc5f3a0bd5c6f69e0"
+    sha = "acbd668dab7685afce1431384f98d450522db9d402af8e487ad4de1e72924ec1"
+    if "pocket_euler" not in excludes:
+        http_archive(
+            name = "pocket_euler",
+            strip_prefix = "PocketEuler-" + pocket_euler_version,
+            urls = ["https://github.com/imsky/PocketEuler/archive/" + pocket_euler_version + ".tar.gz"],
+            build_file = "@euler//third_party:pocket_euler.BUILD",
+            sha256 = sha,
+        )
+
 def _euler_rule_impl(ctx):
     # All tests should have outputs.
     if hasattr(ctx, "outputs"):
@@ -67,6 +78,9 @@ euler_test = rule(
             default = Label("//examine"),
             executable = True,
             cfg = "target",
+        ),
+        "_files": attr.label(
+            default = Label("@pocket_euler//:files"),
         ),
         "_problems": attr.label(
             default = Label("@euler_offline//:project_euler_problems.txt"),
